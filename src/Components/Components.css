@@ -1,0 +1,195 @@
+/* Registration */
+.registration-first {
+    width: 50% !important;
+    padding: 64px 104px 32px 104px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 100vh !important; */
+    overflow-y: auto;
+    gap: 40px;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+
+}
+
+.registration-first .logo {
+    margin-bottom: 120px;
+}
+
+.registration-first .register-btn {
+    background: #2563EB;
+    border-radius: 8px;
+    outline: 0 !important;
+    border: 0 !important;
+    height: 56px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 0;
+    padding: 0;
+    background: transparent !important;
+}
+
+.form-control label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0.05em;
+    color: #000000;
+}
+
+.form-control .form-input {
+    background: #F8F8F8;
+    border-radius: 8px;
+    padding: 19px 20px;
+    outline: 0 !important;
+    border: 0 !important;
+    height: 56px;
+    color: #000000;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0px 1000px #F8F8F8 inset;
+}
+
+.see-pswd-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0 !important;
+    border: 0 !important;
+    background: transparent;
+    cursor: pointer;
+}
+
+.registration-first .optional-btn {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-decoration-line: underline;
+    outline: 0 !important;
+    border: 0 !important;
+    background: transparent;
+    margin-top: 24px;
+}
+
+.registration-second {
+    position: relative;
+    width: 50% !important;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}
+
+.registration-second img {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.registration-second-content {
+    position: absolute;
+    bottom: 0;
+    padding: 56px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+/* otp */
+.otp-input {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #000000;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 100%;
+    width: 100% !important;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid #000000;
+}
+
+
+@media screen and (max-width:991px) {
+    .registration-first {
+        width: 100% !important;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        color: white !important;
+        display: flex;
+        align-items: center;
+        z-index: 99;
+        height: 100%;
+    }
+
+    .registration-second img {
+        height: 100vh !important;
+        overflow-y: auto;
+    }
+
+    label,
+    .logo {
+        color: white !important;
+    }
+
+    .registration-first .register-sub {
+        width: 70% !important;
+    }
+
+    .registration-second {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .registration-first .register-sub {
+        width: 100% !important;
+    }
+
+    .registration-first .logo {
+        margin-bottom: 80px !important;
+    }
+
+}
+
+@media screen and (max-width:500px) {
+    .registration-first {
+        padding: 64px;
+        height: 100% !important;
+        justify-content: center;
+    }
+
+    .registration-first .logo {
+        margin-bottom: 50px !important;
+    }
+
+}

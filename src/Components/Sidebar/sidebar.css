@@ -1,0 +1,105 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: white;
+    height: 100%;
+    width: 310px;
+
+}
+
+.sidebar .side-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 720px;
+    padding: 30px 12px 30px;
+    overflow-y: auto;
+}
+
+.sidebar-item {
+    padding: 0px 13px;
+    gap: 12px;
+    height: 40px;
+    background: transparent;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    text-decoration: none !important;
+    color: black;
+}
+
+
+.sidebar-item:hover,
+.sidebar-item:hover path {
+    color: #2563EB !important;
+    stroke: #2563EB;
+    background: #EFF6FF;
+}
+
+.sidebar-item-active {
+    border-radius: 8px;
+    fill: #2563EB !important;
+    font-weight: 600;
+    background: #EFF6FF;
+    color: #2563EB !important;
+}
+.sidebar-item-active svg path {
+    fill: #2563EB !important;
+    stroke: #2563EB !important;
+}
+.sidebar-item:first-child.sidebar-item-active svg path {
+    fill: #2563EB !important;
+    stroke: #2563EB !important;
+}
+
+.sidebar-item:nth-child(2).sidebar-item-active svg path {
+    fill: #2563EB !important;
+    stroke: #2563EB !important;
+}
+
+.sidebar-item:nth-child(2).sidebar-item-active svg path:nth-child(1),
+.sidebar-item:nth-child(2).sidebar-item-active svg path:nth-child(3) {
+    fill: white !important;
+    stroke: white !important;
+}
+
+.sidebar-item:nth-child(3).sidebar-item-active svg path {
+    fill: #2563EB !important;
+    stroke: #2563EB !important;
+}
+
+.sidebar-item:nth-child(3).sidebar-item-active svg path:last-child {
+    fill: #2563EB !important;
+    stroke: white !important;
+}
+
+.sidebar-bottom {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    border-top: 1px solid #DCDCDC;
+    padding: 21px 24px;
+}
+
+.sidebar-bottom a {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+@media screen and (max-width:991px) {
+    .sidebar {
+        position: absolute;
+        z-index: 200;
+        height: calc(100vh - 80px);
+        width: 240px !important;
+    }
+}
