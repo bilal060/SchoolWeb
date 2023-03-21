@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom';
+import Logo from '../../Assets/Images/logo';
 import RegistrationLayout from '../../Components/Registration'
 
 const ForgotPasswordPage = () => {
@@ -17,7 +18,7 @@ const ForgotPasswordPage = () => {
           <Navigate to="/otp" replace={true} />
         }
         <div className='register-sub'>
-          <div className='logo font-36 font-weight-800 text-gray-900'>Logo</div>
+          <div className='logo font-36 font-weight-800 text-gray-900'><Logo/></div>
           <h1 className='font-40 font-weight-800 text-blue mb-3 letter-spacing'>Forgot Password?</h1>
           <p className='font-18 font-weight-400 mb-5 letter-spacing'>Reset your password</p>
 

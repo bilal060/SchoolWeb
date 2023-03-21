@@ -12,14 +12,7 @@ import PlayVideo from '../../Assets/Images/playVideo'
 import MoveNextVideo from '../../Assets/Images/moveNextVideo'
 import NextVideo from '../../Assets/Images/nextVideo'
 // import '~video-react/dist/video-react.css'; 
-import {
-    Player,
-    ControlBar,
-    ReplayControl,
-    ForwardControl,
-    VolumeMenuButton
-} from 'video-react';
-import PlayerControlExample from '../video'
+
 import ReactPlayer from 'react-player'
 
 const livePreview = [
@@ -90,33 +83,21 @@ const AllCameraPage = () => {
     });
 
     //Destructuring the properties from the videoState
-    const { playing, muted, volume, playbackRate, played, seeking, buffer } =
+    const { playing, muted, volume } =
         videoState;
 
-    const currentTime = videoPlayerRef.current
-        ? videoPlayerRef.current.getCurrentTime()
-        : "00:00";
-    const duration = videoPlayerRef.current
-        ? videoPlayerRef.current.getDuration()
-        : "00:00";
-
-
     const playPauseHandler = () => {
-        //plays and pause the video (toggling)
         setVideoState({ ...videoState, playing: !videoState.playing });
     };
 
     const rewindHandler = () => {
-        //Rewinds the video player reducing 5
         videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() - 5);
     };
 
     const handleFastFoward = () => {
-        //FastFowards the video player by adding 10
         videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() + 10);
     };
     const muteHandler = () => {
-        //Mutes the video player
         setVideoState({ ...videoState, muted: !videoState.muted });
     };
 

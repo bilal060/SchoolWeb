@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LocationIcon from '../../Assets/Images/locationIcon'
+import Logo from '../../Assets/Images/logo'
 import MenuIcon from '../../Assets/Images/menuIcon'
 import SearchIcon from '../../Assets/Images/searchIcon'
 import UserIcon from '../../Assets/Images/userIcon'
 
 const Header = (props) => {
     const { isOpen, setIsOpen } = props;
+    const [userData, setuserData] = useState()
+    useEffect(() => {
+        
+        const currentUser = localStorage.getItem("userdata");
+        setuserData(JSON.parse(currentUser));
+
+    }, [])
+
+    console.log(userData);
+
 
     return (
         <div className='app-header'>
@@ -13,8 +24,8 @@ const Header = (props) => {
                 <button className='d-lg-none menu-btn' onClick={() => { setIsOpen(!isOpen) }}>
                     <MenuIcon />
                 </button>
-                <div className='font-36-48 mb-2 font-weight-800 d-sm-block d-none'>
-                    Logo
+                <div className='font-36-48 font-weight-800 d-sm-block d-none app-logo'>
+                    <Logo />
                 </div>
             </div>
             <div className='d-flex gap-16px align-items-center'>
@@ -33,8 +44,8 @@ const Header = (props) => {
             <div className='d-flex align-items-center gap-16px'>
 
                 <div>
-                    <p className='font-18-100 font-weight-600 mb-1'>Tony Stark</p>
-                    <p className='font-14-100 font-weight-500 text-grey'>Super Admin</p>
+                    <p className='font-18-100 font-weight-600 mb-1'>{userData?.email}</p>
+                    <p className='font-14-100 font-weight-500 text-grey'>{userData?.name}</p>
 
                 </div>
                 <UserIcon />

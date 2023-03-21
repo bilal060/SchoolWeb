@@ -28,7 +28,9 @@ label {
 .gap-50px {
     gap: 50px;
 }
-
+a{
+    text-decoration:none;
+}
 video {
     width: 100%;
     /* min-height: 276px !important; */
@@ -342,7 +344,11 @@ video {
     align-items: center;
     gap: 16px;
 }
-
+.header-logo .app-logo svg {
+    width:100% !important;
+    height:40px;
+    display:block;
+}
 .menu-btn {
     background: transparent;
     border: 0 !important;

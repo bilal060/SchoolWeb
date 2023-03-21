@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import RegistrationLayout from '../../Components/Registration'
 import OtpInput from 'react-otp-input';
 import { Navigate } from 'react-router-dom';
+import Logo from '../../Assets/Images/logo';
 
 const OtpPage = () => {
     const [otp, setotp] = useState();
@@ -27,7 +28,7 @@ const OtpPage = () => {
                     <Navigate to="/resetpassword" replace={true} />
                 }
                 <div className='register-sub'>
-                    <div className='logo font-36 font-weight-800 text-gray-900'>Logo</div>
+                    <div className='logo font-36 font-weight-800 text-gray-900'><Logo/></div>
                     <h1 className='font-40 font-weight-800 text-blue mb-3 letter-spacing'>Enter Code.</h1>
                     <p className='font-18 font-weight-400 mb-5 letter-spacing'>Please enter code sent your email<br />
                         code will expire in <span className='text-blue font-weight-700'>29s</span></p>
