@@ -1,102 +1,27 @@
-import React from 'react'
-import Student1 from '../../Assets/Images/student1'
-import Student2 from '../../Assets/Images/student2'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Student3 from '../../Assets/Images/student3'
 import VerticalDots from '../../Assets/Images/verticalDots'
 
-const studentData = [
-    {
-        id: 1,
-        name: 'Tony Stark ',
-        studentPicture: <Student1 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 2,
-        name: 'Tony Stark ',
-        studentPicture: <Student2 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 3,
-        name: 'Tony Stark ',
-        studentPicture: <Student3 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 4,
-        name: 'Tony Stark ',
-        studentPicture: <Student1 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 5,
-        name: 'Tony Stark ',
-        studentPicture: <Student2 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 6,
-        name: 'Tony Stark ',
-        studentPicture: <Student3 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 7,
-        name: 'Tony Stark ',
-        studentPicture: <Student1 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 8,
-        name: 'Tony Stark ',
-        studentPicture: <Student2 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-    {
-        id: 9,
-        name: 'Tony Stark ',
-        studentPicture: <Student3 />,
-        studentId: 1238743,
-        grade: 'A levels',
-        contactNo: '+1 012 3456 789',
-        emergencyContactNo: '+1 012 3456 789',
-        address: 'House No, City, State'
-    },
-]
+
 const AllStudents = () => {
+    const [studentsData, setstudentsData] = useState([]);
+    const API_URI = 'http://localhost:4000/students';
+    const GetStudents = async () => {
+        try {
+            const fetchData = await axios.get(API_URI)
+            console.log(fetchData)
+            setstudentsData(fetchData)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        GetStudents()
+    }, [])
+    console.log(studentsData.data, "sdfdsfs")
+
     return (
         <>
             <div className='mt-3 rounded-8'>
@@ -119,11 +44,11 @@ const AllStudents = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {studentData.map((data, index) => {
+                            {(studentsData || []).data?.map((data, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{data.studentPicture}</td>
-                                        <td>{data.name}</td>
+                                        <td>{<Student3 />}</td>
+                                        <td className='text-capitalize'>{data.fullName}</td>
                                         <td>{data.studentId}</td>
                                         <td>{data.grade}</td>
                                         <td>{data.contactNo}</td>

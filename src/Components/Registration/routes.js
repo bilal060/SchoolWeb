@@ -4,6 +4,8 @@ import LoginPage from '../../Pages/Login'
 import ForgotPasswordPage from '../../Pages/Forgot Password'
 import OtpPage from '../../Pages/Otp Page'
 import ResetPasswordPage from '../../Pages/ResetPassword'
+import RegisterPage from '../../Pages/Register'
+import ChangePasswordOtpPage from '../../Pages/Otp Page/changePasswordOtp'
 
 const RegistrationRoutes = () => {
     return (
@@ -13,8 +15,12 @@ const RegistrationRoutes = () => {
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
-                <Route path="/otp" element={<OtpPage />} />
+                <Route path="/verifyuser" element={<OtpPage />} />
+                <Route path="/changepasswordotp" element={<ChangePasswordOtpPage />} />
                 <Route path="/resetpassword" element={<ResetPasswordPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+
+
 
 
             </Routes>

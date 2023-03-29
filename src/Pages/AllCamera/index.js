@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import TotalCount from '../../Components/Dashboard/TotalCounts'
 import Mute from '../../Assets/Images/mute'
+import UnmuteVideo from '../../Assets/Images/unmuteVideo'
+
 import Camera from '../../Assets/Images/camera'
 import LargeScreen from '../../Assets/Images/largeScreen'
 import Plus from '../../Assets/Images/plus'
@@ -9,10 +11,9 @@ import { NavLink } from 'react-router-dom'
 import BackVideo from '../../Assets/Images/backVideo'
 import PreviousVideo from '../../Assets/Images/prevVideo'
 import PlayVideo from '../../Assets/Images/playVideo'
+import PauseVideo from '../../Assets/Images/pauseVideo'
 import MoveNextVideo from '../../Assets/Images/moveNextVideo'
 import NextVideo from '../../Assets/Images/nextVideo'
-// import '~video-react/dist/video-react.css'; 
-
 import ReactPlayer from 'react-player'
 
 const livePreview = [
@@ -120,7 +121,7 @@ const AllCameraPage = () => {
                         volume={volume}
                         muted={muted}
                     />
-                    
+
                     {/* <PlayerControlExample/> */}
 
                     <span className='camera-position-live camera-live'>{previewData?.cameraPosition}</span>
@@ -134,7 +135,7 @@ const AllCameraPage = () => {
                     </div>
 
                     <div className='flex-md-column gap-16px camera-recording-options-side d-sm-flex d-none'>
-                        <span className='camera-live cr-p' onClick={() => muteHandler()}><Mute /></span>
+                        <span className='camera-live cr-p' onClick={() => muteHandler()}>{videoState.muted ? <Mute/> : <UnmuteVideo />}</span>
                         <span className='camera-live cr-p'><Camera /></span>
                         <span className='camera-live cr-p '><LargeScreen /></span>
                         <span className='camera-live cr-p'><Plus /></span>
@@ -143,7 +144,7 @@ const AllCameraPage = () => {
                     <div className='d-flex flex-row camera-live gap-50px px-sm-5 px-3 py-4 camera-recording-options-bottom'>
                         <span className='cr-p w-100' onClick={() => rewindHandler()}><BackVideo /></span>
                         <span className='cr-p w-100'><PreviousVideo /></span>
-                        <span className='cr-p w-100' onClick={() => playPauseHandler()}><PlayVideo /></span>
+                        <span className='cr-p w-100' onClick={() => playPauseHandler()}>{videoState.playing ? <PlayVideo /> : <PauseVideo />}</span>
                         <span className='cr-p w-100'><MoveNextVideo /></span>
                         <span className='cr-p w-100' onClick={() => handleFastFoward()}><NextVideo /></span>
                     </div>

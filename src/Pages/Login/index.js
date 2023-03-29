@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { Navigate, NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../Assets/Images/logo';
 import ShowPassword from '../../Assets/Images/showPassword';
 import RegistrationLayout from '../../Components/Registration'
@@ -9,42 +9,42 @@ import RegistrationLayout from '../../Components/Registration'
 
 const LoginPage = () => {
     const [passwordShown, setPasswordShown] = useState(false);
-    const [isloggedin, setisloggedin] = useState(false);
     const [loginDetails, setloginDetails] = useState({
         email: '',
         password: ''
     });
-    const [loading, setloading] = useState(false);
-
+    const [rememberCheck, setrememberCheck] = useState(false);
+    const [rememberUser, setrememberUser] = useState([]);
+    const [loading, setloading] = useState(true);
     const [login, setlogin] = useState([]);
-
-
-
+    const navigate = useNavigate();
     const API_URI = 'http://localhost:4000/login';
+
     const postLoginData = async () => {
         try {
+            setloading(false);
             const fetchData = await axios.post(API_URI, loginDetails)
             setlogin(fetchData)
-            console.log(fetchData, "12121")
-            setloading(true)
-            localStorage.setItem("token", fetchData.data.userFetch.token);
+
+            localStorage.clear();
+            localStorage.setItem('remember-user', JSON.stringify(fetchData.data.userFetch));
+            localStorage.setItem('user-token', fetchData.data.userFetch.token);
             localStorage.setItem("userdata", JSON.stringify(fetchData.data.userFetch));
 
-        } catch (error) {
+            setTimeout(() => {
+                navigate('/dashboard');
+            }, 500);
+
+        }
+        catch (error) {
             console.log(error)
+            setloading(true);
+            alert('Unable to login. Please try after some time.');
         }
     }
     const submitHandler = async e => {
         e.preventDefault();
         postLoginData();
-
-        setloading(true);
-        if (login?.data.userFetch.verified) {
-            setisloggedin(true);
-        }
-        else {
-            alert("user not matched")
-        }
     }
     console.log(login)
 
@@ -56,12 +56,19 @@ const LoginPage = () => {
             [name]: value
         }));
     }
+    useEffect(() => {
+        setrememberUser(localStorage.getItem("remember-user"))
+    }, [rememberCheck])
+
     return (
         <>
+            {!loading &&
+                <div className='loader-main'>
+                    <div className="loader"><div></div><div></div><div></div><div></div></div>
+                </div>
+            }
+
             <RegistrationLayout>
-                {isloggedin &&
-                    <Navigate to="/dashboard" replace={true} />
-                }
                 <div className='register-sub'>
                     <div className='logo font-36 font-weight-800 text-gray-900'><Logo /></div>
                     <h1 className='font-40 font-weight-800 text-blue mb-3 letter-spacing'>Admin Login.</h1>
@@ -77,6 +84,7 @@ const LoginPage = () => {
                                 placeholder='Enter your email'
                                 className='form-input'
                                 onChange={e => formHandler(e)}
+                                value={rememberUser?.name}
 
                             />
                         </div>
@@ -101,7 +109,7 @@ const LoginPage = () => {
 
                         </div>
                         <div className='d-flex align-items-center mb-5'>
-                            <input type='checkbox' id='remember' className='mr-2' />
+                            <input type='checkbox' id='remember' className='mr-2' onChange={() => setrememberCheck(!rememberCheck)} />
                             <label htmlFor='remember' className='font-16 font-weight-400 letter-spacing'>
                                 Remember me
                             </label>

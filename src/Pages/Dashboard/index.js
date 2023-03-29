@@ -10,7 +10,7 @@ const DashboardPage = () => {
             <TotalCount />
             <PreviewSection />
             <AllStudents />
-            <SitePlanEvents/>
+            <SitePlanEvents />
         </div>
     )
 }

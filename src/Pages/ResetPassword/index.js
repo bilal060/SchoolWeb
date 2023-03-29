@@ -1,30 +1,75 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../Assets/Images/logo';
 import ShowPassword from '../../Assets/Images/showPassword';
 import RegistrationLayout from '../../Components/Registration'
 
 const ResetPasswordPage = () => {
+    const navigate = useNavigate();
     const [passwordShown1, setPasswordShown1] = useState(false);
     const [passwordShown2, setPasswordShown2] = useState(false);
-
-
     const [newPassword, setnewPassword] = useState('');
     const [retypePassword, setretypePassword] = useState('');
+    const [userData, setuserData] = useState()
 
-    console.log(newPassword.length)
+    const [loading, setloading] = useState(true);
+
+    useEffect(() => {
+        const currentUser = localStorage.getItem("forgot_password_detail");
+        setuserData(JSON.parse(currentUser));
+    }, [])
+    const resetPasswordDetails = {
+        email: userData?.email,
+        otp: userData?.otp,
+        newPass: retypePassword
+    }
+    console.log(resetPasswordDetails)
+
+    const API_URI = 'http://localhost:4000/reset';
+    const ResetPassword = async () => {
+        try {
+            setloading(false)
+            const fetchData = await axios.post(API_URI, resetPasswordDetails)
+            console.log(fetchData)
+            setTimeout(() => {
+                navigate('/login');
+            }, 500);
+            localStorage.clear();
+        }
+        catch (error) {
+            console.log(error)
+            setloading(true);
+            alert('Unable to login. Please try after some time.');
+        }
+    }
+    const submitHandler = (e) => {
+        e.preventDefault();
+        ResetPassword();
+
+    }
+
+
     return (
         <>
+            {!loading &&
+                <div className='loader-main'>
+                    <div className="loader"><div></div><div></div><div></div><div></div></div>
+                </div>
+            }
             <RegistrationLayout>
                 <div className='register-sub'>
-                    <div className='logo font-36 font-weight-800 text-gray-900'><Logo/></div>
+                    <div className='logo font-36 font-weight-800 text-gray-900'><Logo /></div>
                     <h1 className='font-40 font-weight-800 text-blue mb-3 letter-spacing'>Reset Password.</h1>
                     <p className='font-18 font-weight-400 mb-5 letter-spacing'>Reset your new password</p>
 
-                    <form onSubmit={(e) => { e.preventDefault() }}>
+                    <form onSubmit={(e) => submitHandler(e)}>
                         <div className='form-control mb-4'>
                             <label>New Password</label>
                             <div className='form-input pl-0 py-0 d-flex align-items-center justify-content-between' >
                                 <input
+                                    minLength={8}
+                                    maxLength={16}
                                     value={newPassword}
                                     onChange={(e) => setnewPassword(e.target.value)}
                                     type={passwordShown1 ? "text" : "password"}
@@ -50,6 +95,8 @@ const ResetPasswordPage = () => {
                             <label>Re-Type Password</label>
                             <div className='form-input pl-0 py-0 d-flex align-items-center justify-content-between' >
                                 <input
+                                    minLength={8}
+                                    maxLength={16}
                                     value={retypePassword}
                                     onChange={(e) => setretypePassword(e.target.value)}
                                     type={passwordShown2 ? "text" : "password"}

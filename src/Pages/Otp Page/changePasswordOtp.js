@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../Assets/Images/logo';
 import axios from 'axios';
 
-const OtpPage = () => {
+const ChangePasswordOtpPage = () => {
     const navigate = useNavigate();
     const [otp, setotp] = useState();
     const [userData, setuserData] = useState()
     const [loading, setloading] = useState(true);
 
     useEffect(() => {
-        const currentUser = localStorage.getItem("userdata");
+        const currentUser = localStorage.getItem("forgot_password");
         setuserData(JSON.parse(currentUser));
     }, [])
     const otpDetails = {
@@ -22,15 +22,17 @@ const OtpPage = () => {
     const handleChange = (otp) => {
         setotp(otp)
     };
+    console.log(otp)
 
     const API_URI = 'http://localhost:4000/verifyUser';
     const verifyOtp = async () => {
         try {
             setloading(false)
             const fetchData = await axios.post(API_URI, otpDetails)
+            localStorage.setItem("forgot_password_detail", JSON.stringify(otpDetails));
             console.log(fetchData)
             setTimeout(() => {
-                navigate('/login');
+                navigate('/resetpassword');
             }, 500);
 
         }
@@ -91,4 +93,4 @@ const OtpPage = () => {
     )
 }
 
-export default OtpPage
+export default ChangePasswordOtpPage

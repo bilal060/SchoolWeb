@@ -87,7 +87,7 @@
     padding: 21px 24px;
 }
 
-.sidebar-bottom a {
+.sidebar-bottom .logout {
     display: flex !important;
     justify-content: flex-start;
     align-items: center;

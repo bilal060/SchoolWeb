@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SideBarRoutes from './sidebarRoutes';
 import './sidebar.css'
 import Logout from '../../Assets/Images/logout';
@@ -8,6 +8,12 @@ const Sidebar = (props) => {
     const { isOpen } = props;
     const sidebar = SideBarRoutes()
     const Location = useLocation();
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/login');
+    }
 
     return (
         <>
@@ -46,10 +52,10 @@ const Sidebar = (props) => {
                     }
                 </div>
                 <div className="sidebar-bottom w-100">
-                    <Link to='/login'>
+                    <div onClick={() => logout()} className='logout cr-p'>
                         <Logout />
                         <span className='text-blue font-weight-600'>Log Out</span>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </>

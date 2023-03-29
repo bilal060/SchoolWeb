@@ -3,19 +3,21 @@ import LocationIcon from '../../Assets/Images/locationIcon'
 import Logo from '../../Assets/Images/logo'
 import MenuIcon from '../../Assets/Images/menuIcon'
 import SearchIcon from '../../Assets/Images/searchIcon'
-import UserIcon from '../../Assets/Images/userIcon'
+import UserIcon from '../../Assets/Images/userIcon.png'
+
+import { Dropdown } from 'react-bootstrap'
 
 const Header = (props) => {
     const { isOpen, setIsOpen } = props;
     const [userData, setuserData] = useState()
     useEffect(() => {
-        
+
         const currentUser = localStorage.getItem("userdata");
         setuserData(JSON.parse(currentUser));
 
     }, [])
 
-    console.log(userData);
+    // console.log(userData);
 
 
     return (
@@ -24,7 +26,7 @@ const Header = (props) => {
                 <button className='d-lg-none menu-btn' onClick={() => { setIsOpen(!isOpen) }}>
                     <MenuIcon />
                 </button>
-                <div className='font-36-48 font-weight-800 d-sm-block d-none app-logo'>
+                <div className='font-36-48 font-weight-800 app-logo'>
                     <Logo />
                 </div>
             </div>
@@ -41,15 +43,27 @@ const Header = (props) => {
                     </div>
                 </div>
             </div>
-            <div className='d-flex align-items-center gap-16px'>
-
-                <div>
+            <div className='d-md-flex d-none align-items-center gap-16px'>
+                <div className='d-md-block d-none'>
                     <p className='font-18-100 font-weight-600 mb-1'>{userData?.email}</p>
-                    <p className='font-14-100 font-weight-500 text-grey'>{userData?.name}</p>
-
+                    <p className='font-14-100 font-weight-500 text-grey text-capitalize'>{userData?.name}</p>
                 </div>
-                <UserIcon />
+                <img src={UserIcon} alt='' />
             </div>
+            <Dropdown className='d-md-none d-block'>
+                <Dropdown.Toggle className='user-dropdown h-100' id="dropdown-basic">
+                    <img src={UserIcon} alt='' />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className='user-dropdown-menu'>
+                    <Dropdown.Item className='border-bottom'>
+                        <p className='font-18 font-weight-500 text-grey text-capitalize'>{userData?.name}</p>
+                    </Dropdown.Item>
+                    <Dropdown.Item className='pt-3'>
+                        <p className='font-14-100 font-weight-500 text-grey'>{userData?.email}</p>
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
         </div>
     )
 }
