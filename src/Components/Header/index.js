@@ -3,7 +3,6 @@ import LocationIcon from '../../Assets/Images/locationIcon'
 import Logo from '../../Assets/Images/logo'
 import MenuIcon from '../../Assets/Images/menuIcon'
 import SearchIcon from '../../Assets/Images/searchIcon'
-import UserIcon from '../../Assets/Images/userIcon.png'
 
 import { Dropdown } from 'react-bootstrap'
 
@@ -11,14 +10,10 @@ const Header = (props) => {
     const { isOpen, setIsOpen } = props;
     const [userData, setuserData] = useState()
     useEffect(() => {
-
         const currentUser = localStorage.getItem("userdata");
         setuserData(JSON.parse(currentUser));
 
     }, [])
-
-    // console.log(userData);
-
 
     return (
         <div className='app-header'>
@@ -48,11 +43,11 @@ const Header = (props) => {
                     <p className='font-18-100 font-weight-600 mb-1'>{userData?.email}</p>
                     <p className='font-14-100 font-weight-500 text-grey text-capitalize'>{userData?.name}</p>
                 </div>
-                <img src={UserIcon} alt='' />
+                <img src={userData?.image} alt='' className='w-100 h-100 user-icon-header' />
             </div>
             <Dropdown className='d-md-none d-block'>
                 <Dropdown.Toggle className='user-dropdown h-100' id="dropdown-basic">
-                    <img src={UserIcon} alt='' />
+                    <img src={userData?.image} alt='' className='w-100 h-100 user-icon-header' />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className='user-dropdown-menu'>

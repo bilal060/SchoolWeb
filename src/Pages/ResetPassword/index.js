@@ -11,6 +11,7 @@ const ResetPasswordPage = () => {
     const [passwordShown2, setPasswordShown2] = useState(false);
     const [newPassword, setnewPassword] = useState('');
     const [retypePassword, setretypePassword] = useState('');
+    const [passwordCheck, setpasswordCheck] = useState(false);
     const [userData, setuserData] = useState()
 
     const [loading, setloading] = useState(true);
@@ -24,14 +25,12 @@ const ResetPasswordPage = () => {
         otp: userData?.otp,
         newPass: retypePassword
     }
-    console.log(resetPasswordDetails)
 
     const API_URI = 'http://localhost:4000/reset';
     const ResetPassword = async () => {
         try {
             setloading(false)
-            const fetchData = await axios.post(API_URI, resetPasswordDetails)
-            console.log(fetchData)
+            await axios.post(API_URI, resetPasswordDetails)
             setTimeout(() => {
                 navigate('/login');
             }, 500);
@@ -40,13 +39,17 @@ const ResetPasswordPage = () => {
         catch (error) {
             console.log(error)
             setloading(true);
-            alert('Unable to login. Please try after some time.');
+            alert('Unable to reset password. Please try after some time.');
         }
     }
     const submitHandler = (e) => {
         e.preventDefault();
-        ResetPassword();
-
+        setpasswordCheck(true)
+        if (newPassword?.length < 16 && newPassword?.length > 8 && retypePassword === newPassword) {
+            ResetPassword();
+        }
+        else
+            return
     }
 
 
@@ -68,8 +71,6 @@ const ResetPasswordPage = () => {
                             <label>New Password</label>
                             <div className='form-input pl-0 py-0 d-flex align-items-center justify-content-between' >
                                 <input
-                                    minLength={8}
-                                    maxLength={16}
                                     value={newPassword}
                                     onChange={(e) => setnewPassword(e.target.value)}
                                     type={passwordShown1 ? "text" : "password"}
@@ -81,13 +82,17 @@ const ResetPasswordPage = () => {
                                     <ShowPassword />
                                 </span>
                             </div>
-                            {newPassword?.length > 16 || newPassword?.length < 8 ?
-                                <div className='d-flex justify-content-start align-items-center'>
-                                    <p className='text-danger'>Password must contain at least 8 to 16 characters. </p>
-                                </div>
-                                :
-                                <div className='d-flex justify-content-end align-items-center'>
-                                    <p className='text-green font-weight-600'>Good</p>
+                            {passwordCheck &&
+                                <div>
+                                    {newPassword?.length > 16 || newPassword?.length < 8 ?
+                                        <div className='d-flex justify-content-start align-items-center'>
+                                            <p className='text-danger'>Password must contain at least 8 to 16 characters. </p>
+                                        </div>
+                                        :
+                                        <div className='d-flex justify-content-end align-items-center'>
+                                            <p className='text-green font-weight-600'>Good</p>
+                                        </div>
+                                    }
                                 </div>
                             }
                         </div>
@@ -95,8 +100,6 @@ const ResetPasswordPage = () => {
                             <label>Re-Type Password</label>
                             <div className='form-input pl-0 py-0 d-flex align-items-center justify-content-between' >
                                 <input
-                                    minLength={8}
-                                    maxLength={16}
                                     value={retypePassword}
                                     onChange={(e) => setretypePassword(e.target.value)}
                                     type={passwordShown2 ? "text" : "password"}
@@ -108,7 +111,7 @@ const ResetPasswordPage = () => {
                                     <ShowPassword />
                                 </span>
                             </div>
-                            {retypePassword !== newPassword ? <p className='text-danger'>Passwords are not same. </p> : ''}
+                            {passwordCheck && retypePassword !== newPassword ? <p className='text-danger'>Passwords are not same. </p> : ''}
                         </div>
                         <div>
                             <button type='submit' className='register-btn w-100'>Save</button>

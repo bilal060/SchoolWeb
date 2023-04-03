@@ -24,7 +24,7 @@ const ChangePasswordOtpPage = () => {
     };
     console.log(otp)
 
-    const API_URI = 'http://localhost:4000/verifyUser';
+    const API_URI = 'http://localhost:4000/otpverify';
     const verifyOtp = async () => {
         try {
             setloading(false)

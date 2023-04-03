@@ -20,7 +20,6 @@ const AllStudents = () => {
     useEffect(() => {
         GetStudents()
     }, [])
-    console.log(studentsData.data, "sdfdsfs")
 
     return (
         <>

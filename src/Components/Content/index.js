@@ -4,6 +4,7 @@ import AlertPage from '../../Pages/AlertPage'
 import AllCameraPage from '../../Pages/AllCamera'
 import DashboardPage from '../../Pages/Dashboard'
 import LoginPage from '../../Pages/Login'
+import SettingsPage from '../../Pages/SettingPage'
 import { ProtectedRoutes } from '../../utils/ProtectedRoutes';
 
 const ContentRoutes = () => {
@@ -18,7 +19,7 @@ const ContentRoutes = () => {
                 <Route path="/teachersportal" element={<ProtectedRoutes component={DashboardPage} />} />
                 <Route path="/management" element={<ProtectedRoutes component={DashboardPage} />} />
                 <Route path="/events" element={<ProtectedRoutes component={DashboardPage} />} />
-                <Route path="/setting" element={<ProtectedRoutes component={DashboardPage} />} />
+                <Route path="/setting" element={<ProtectedRoutes component={SettingsPage} />} />
             </Routes>
         </>
     )

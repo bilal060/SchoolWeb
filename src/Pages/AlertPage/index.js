@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Alert1 from '../../Assets/Images/alert1'
 import Alert2 from '../../Assets/Images/alert2'
 import Alert3 from '../../Assets/Images/alert3'
@@ -39,111 +40,34 @@ const alerts = [
         background: 'bg-blueish'
     },
 ]
-const studentData = [
-    {
-        id: 1,
-        alertName: 'Fire Alarm',
-        location: 'Basketball Court ',
-        date: '03/03/2023',
-        prority: 'Urgent',
-        time: '10:33 AM',
-        alertReason: 'Short Circuit'
-    },
-    {
-        id: 2,
-        alertName: 'Suspicious  Activity',
-        location: 'South West Gate ',
-        date: '03/03/2023',
-        prority: 'High',
-        time: '10:33 AM',
-        alertReason: 'Unauthorised Person '
-    },
-    {
-        id: 3,
-        alertName: 'Evacuation Alert',
-        location: 'Eastern Wing',
-        date: '03/03/2023',
-        prority: 'Low',
-        time: '10:33 AM',
-        alertReason: 'Earthquake '
-    },
-    {
-        id: 4,
-        alertName: 'Fire Alarm',
-        location: 'Basketball Court ',
-        date: '03/03/2023',
-        prority: 'Urgent',
-        time: '10:33 AM',
-        alertReason: 'Short Circuit'
-    },
-    {
-        id: 5,
-        alertName: 'Suspicious  Activity',
-        location: 'South West Gate ',
-        date: '03/03/2023',
-        prority: 'High',
-        time: '10:33 AM',
-        alertReason: 'Unauthorised Person '
-    },
-    {
-        id: 6,
-        alertName: 'Evacuation Alert',
-        location: 'Eastern Wing ',
-        date: '03/03/2023',
-        prority: 'Low',
-        time: '10:33 AM',
-        alertReason: 'Earthquake'
-    },
-    {
-        id: 7,
-        alertName: 'Fire Alarm',
-        location: 'Basketball Court ',
-        date: '03/03/2023',
-        prority: 'Urgent',
-        time: '10:33 AM',
-        alertReason: 'Short Circuit'
-    },
-    {
-        id: 8,
-        alertName: 'Suspicious  Activity',
-        location: 'South West Gate ',
-        date: '03/03/2023',
-        prority: 'High',
-        time: '10:33 AM',
-        alertReason: 'Unauthorised Person '
-    },
-    {
-        id: 9,
-        alertName: 'Evacuation Alert',
-        location: 'Eastern Wing ',
-        date: '03/03/2023',
-        prority: 'Low',
-        time: '10:33 AM',
-        alertReason: 'Earthquake'
-    },
-    {
-        id: 10,
-        alertName: 'Fire Alarm',
-        location: 'Basketball Court ',
-        date: '03/03/2023',
-        prority: 'Urgent',
-        time: '10:33 AM',
-        alertReason: 'Short Circuit'
-    },
-    {
-        id: 11,
-        alertName: 'Suspicious  Activity',
-        location: 'South West Gate ',
-        date: '03/03/2023',
-        prority: 'High',
-        time: '10:33 AM',
-        alertReason: 'Unauthorised Person '
-    },
-
-
-]
 
 const AlertPage = () => {
+    const [alertsData, setalertsData] = useState([]);
+    const API_URI = 'http://localhost:4000/Alerts';
+    const getAlerts = async () => {
+        try {
+            const fetchData = await axios.get(API_URI)
+            console.log(fetchData)
+            setalertsData(fetchData)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        getAlerts()
+    }, [])
+
+    // const setAlert = async (data) => {
+    //     try {
+    //         const fetchData = await axios.post(API_URI, data)
+
+    //         setalertsData(fetchData)
+    //     }
+    //     catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     return (
         <>
             <div>
@@ -152,7 +76,7 @@ const AlertPage = () => {
                     {
                         alerts.map((data, index) => {
                             return (<div key={index} className='col-lg-3 col-sm-6 mb-3 p-0'>
-                                <div className={`${data.background} mr-3 alerts-main flex-xl-row flex-lg-column`}>
+                                <div className={`${data.background} mr-3 alerts-main flex-xl-row flex-lg-column cr-p`} >
                                     <div className={`${data.alertIconbg} alert-icon`}>{data.alertIcon}</div>
                                     <p className='text-lg-center text-xl-left font-18-22 font-weight-500'>{data.alertName}</p>
                                 </div>
@@ -200,15 +124,15 @@ const AlertPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {studentData.map((data, index) => {
+                            {(alertsData || []).data?.map((data, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{data.alertName}</td>
-                                        <td>{data.location}</td>
-                                        <td>{data.date}</td>
-                                        <td>{data.time}</td>
-                                        <td>{data.alertReason}</td>
-                                        <td><span className={`prority ${data.prority === 'Urgent' ? 'urgent' : data.prority === 'High' ? 'high' : 'low'}`}>{data.prority}</span></td>
+                                        <td>{data.Alert}</td>
+                                        <td>{data.Location}</td>
+                                        <td>{data.createDate}</td>
+                                        <td>{data.createTime}</td>
+                                        <td>{data.AlertReason}</td>
+                                        <td><span className={`prority ${data.AlertPrority === 'Urgent' ? 'urgent' : data.AlertPrority === 'High' ? 'high' : 'low'}`}>{data.AlertPrority}</span></td>
                                         <td><VerticalDots /></td>
                                     </tr>
                                 )

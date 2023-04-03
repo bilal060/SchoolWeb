@@ -11,6 +11,7 @@ const SignupPage = () => {
     const [loading, setloading] = useState(true);
     const [passwordShown, setPasswordShown] = useState(false);
     const [termsCheck, setTermsCheck] = useState(false);
+    const [passwordCheck, setpasswordCheck] = useState(false);
     const [signinDetails, setSigninDetails] = useState({
         name: '',
         email: '',
@@ -43,7 +44,15 @@ const SignupPage = () => {
 
     const submitHandler = async e => {
         e.preventDefault();
-        postSigninData();
+        setpasswordCheck(true)
+        if (signinDetails.password?.length < 16 && signinDetails.password?.length > 8) {
+            postSigninData();
+            console.log('sds')
+        }
+        else
+            console.log('sdaassas')
+
+            return
     }
 
     const formHandler = (e) => {
@@ -103,8 +112,8 @@ const SignupPage = () => {
                                     <input
                                         name='password'
                                         required
-                                        minLength={8}
-                                        maxLength={16}
+                                        // minLength={8}
+                                        // maxLength={16}
                                         type={passwordShown ? "text" : "password"}
                                         placeholder='Enter password'
                                         className='form-input w-75 font-weight-800'
@@ -116,13 +125,17 @@ const SignupPage = () => {
                                         <ShowPassword />
                                     </span>
                                 </div>
-                                {signinDetails.password?.length > 16 || signinDetails.password?.length < 8 ?
-                                    <div className='d-flex justify-content-start align-items-center'>
-                                        <p className='text-danger'>Password must contain at least 8 to 16 characters. </p>
-                                    </div>
-                                    :
-                                    <div className='d-flex justify-content-end align-items-center'>
-                                        <p className='text-green font-weight-600'>Good</p>
+                                {passwordCheck &&
+                                    <div>
+                                        {signinDetails.password?.length > 16 || signinDetails.password?.length < 8 ?
+                                            <div className='d-flex justify-content-start align-items-center'>
+                                                <p className='text-danger'>Password must contain at least 8 to 16 characters. </p>
+                                            </div>
+                                            :
+                                            <div className='d-flex justify-content-end align-items-center'>
+                                                <p className='text-green font-weight-600'>Good</p>
+                                            </div>
+                                        }
                                     </div>
                                 }
 
