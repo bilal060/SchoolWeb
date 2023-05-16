@@ -1,11 +1,11 @@
-import axios from 'axios'
+import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://localhost:4000',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
+  baseURL: process.env.REACT_APP_API_URI,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
 });
 
 export default api;

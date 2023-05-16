@@ -1,11 +1,11 @@
-import { useLocation } from 'react-router-dom';
-import '../src/Pages/common.css';
-import ContentRoutes from './Components/Content';
-import AppLayout from './Components/Layout';
-import RegistrationRoutes from './Components/Registration/routes';
+import { useLocation } from "react-router-dom";
+import "../src/Pages/common.css";
+import ContentRoutes from "./Components/Content";
+import RegistrationRoutes from "./Components/Registration/routes";
+import AppLayout from "./Components/Layout";
 
 function App() {
-  const homepage = ['/dashboard', '/alert', '/cameras', '/studentsportal', '/teachersportal', '/management', '/events', '/setting']
+  const homepage = ["/dashboard", "/alert", "/cameras"];
   const location = useLocation();
 
   if (homepage.includes(location.pathname)) {
@@ -14,11 +14,7 @@ function App() {
         <ContentRoutes />
       </AppLayout>
     );
-  }
-  else
-    return (
-      <RegistrationRoutes />
-    );
+  } else return <RegistrationRoutes />;
 }
 
 export default App;

@@ -23,7 +23,7 @@ const OtpPage = () => {
         setotp(otp)
     };
 
-    const API_URI = 'http://localhost:4000/verifyUser';
+    const API_URI = `${process.env.REACT_APP_API_URI}/verifyUser`;
     const verifyOtp = async () => {
         try {
             setloading(false)

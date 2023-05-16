@@ -26,7 +26,7 @@ const ResetPasswordPage = () => {
         newPass: retypePassword
     }
 
-    const API_URI = 'http://localhost:4000/reset';
+    const API_URI = `${process.env.REACT_APP_API_URI}/reset`;
     const ResetPassword = async () => {
         try {
             setloading(false)

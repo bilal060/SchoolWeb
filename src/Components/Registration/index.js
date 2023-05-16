@@ -11,7 +11,7 @@ const RegistrationLayout = (props) => {
                     © Copyright 2023 Company Name. All rights reserved.
                 </div>
             </div>
-            <div className='registration-second '>
+            <div className='registration-second'>
                 <div className='registration-second-content d-lg-block d-none'>
                     <h1 className='font-36-48 font-weight-700 mb-4'>
                         Lorem ipsum dolor consectetur. Velit maecenas congue lectus platea.

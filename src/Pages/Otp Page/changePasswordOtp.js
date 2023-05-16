@@ -24,7 +24,7 @@ const ChangePasswordOtpPage = () => {
     };
     console.log(otp)
 
-    const API_URI = 'http://localhost:4000/otpverify';
+    const API_URI = `${process.env.REACT_APP_API_URI}/otpverify`;
     const verifyOtp = async () => {
         try {
             setloading(false)

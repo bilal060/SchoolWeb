@@ -13,7 +13,7 @@ const ForgotPasswordPage = () => {
   const [loading, setloading] = useState(true);
 
   console.log(email)
-  const API_URI = 'http://localhost:4000/resetPassWithOTP';
+  const API_URI = `${process.env.REACT_APP_API_URI}/resetPassWithOTP`;
   const resetPassword = async () => {
     try {
       setloading(false)
