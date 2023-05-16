@@ -24,7 +24,7 @@ const SettingsPage = () => {
       const data = new FormData();
       let allowEdit = false;
       if(newDetail.name){
-        data.append("email", newDetail.name);
+        data.append("name", newDetail.name);
         allowEdit= true
       }
       if(newDetail.password){
