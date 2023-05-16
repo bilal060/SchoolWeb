@@ -5,7 +5,7 @@ import RegistrationRoutes from "./Components/Registration/routes";
 import AppLayout from "./Components/Layout";
 
 function App() {
-  const homepage = ["/dashboard", "/alert", "/cameras"];
+  const homepage = ["/dashboard", "/alert", "/cameras", "/settings"];
   const location = useLocation();
 
   if (homepage.includes(location.pathname)) {

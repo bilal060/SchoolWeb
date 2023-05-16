@@ -45,7 +45,7 @@ const ResetPasswordPage = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         setpasswordCheck(true)
-        if (newPassword?.length < 16 && newPassword?.length > 8 && retypePassword === newPassword) {
+        if (newPassword?.length < 16 && newPassword?.length >= 8 && retypePassword === newPassword) {
             ResetPassword();
         }
         else

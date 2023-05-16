@@ -17,7 +17,7 @@ const SignupPage = () => {
   });
   const navigate = useNavigate();
 
-  const API_URI = "http://localhost:4000/signup";
+  const API_URI = `${process.env.REACT_APP_API_URI}/signup`;
   const postSigninData = async () => {
     try {
       setloading(false);
@@ -42,7 +42,7 @@ const SignupPage = () => {
     setpasswordCheck(true);
     if (
       signinDetails.password?.length < 16 &&
-      signinDetails.password?.length > 8
+      signinDetails.password?.length >= 8
     ) {
       postSigninData();
       console.log("sds");

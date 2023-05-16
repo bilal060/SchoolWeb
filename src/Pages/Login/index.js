@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../Assets/Images/logo";
 import ShowPassword from "../../Assets/Images/showPassword";
 import RegistrationLayout from "../../Components/Registration";

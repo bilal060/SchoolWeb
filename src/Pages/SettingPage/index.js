@@ -17,7 +17,7 @@ const SettingsPage = () => {
     password: "",
     image: "",
   });
-
+  console.log(newDetail.image);
   const API_URI = `${process.env.REACT_APP_API_URI}//UpdateUserSetting/${userData?._id}`;
   const changeUserData = async () => {
     try {
@@ -33,7 +33,7 @@ const SettingsPage = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setpasswordCheck(true);
-    if (newDetail.password?.length < 16 && newDetail.password?.length > 8) {
+    if (newDetail.password?.length < 16 && newDetail.password?.length >= 8) {
       changeUserData();
     } else return;
   };
