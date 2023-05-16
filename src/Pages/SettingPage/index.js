@@ -22,13 +22,27 @@ const SettingsPage = () => {
   const changeUserData = async () => {
     try {
       const data = new FormData();
-      data.append("email", newDetail.email);
-      data.append("password", newDetail.password);
-      data.append("image", newDetail.image);
+      let allowEdit = false;
+      if(newDetail.name){
+        data.append("email", newDetail.name);
+        allowEdit= true
+      }
+      if(newDetail.password){
+        data.append("password", newDetail.password);
+        allowEdit= true
+      }
+      if(newDetail.image){
+        data.append("image", newDetail.image);
+        allowEdit= true
+      }
 
-      const fetchData = await axios.patch(API_URI, data);
-      console.log(fetchData);
-      localStorage.setItem("userdata", JSON.stringify(fetchData?.data.user));
+      if(allowEdit) {
+        const fetchData = await axios.patch(API_URI, data);
+        console.log(fetchData);
+        localStorage.setItem("userdata", JSON.stringify(fetchData?.data.user));
+      }
+
+
     } catch (error) {
       console.log(error);
       alert("Unable to Sign in. Please try after some time.");
