@@ -17,11 +17,16 @@ const SettingsPage = () => {
     password: "",
     image: "",
   });
-  console.log(newDetail.image);
   const API_URI = `${process.env.REACT_APP_API_URI}//UpdateUserSetting/${userData?._id}`;
+
   const changeUserData = async () => {
     try {
-      const fetchData = await axios.patch(API_URI, newDetail);
+      const data = new FormData();
+      data.append("email", newDetail.email);
+      data.append("password", newDetail.password);
+      data.append("image", newDetail.image);
+
+      const fetchData = await axios.patch(API_URI, data);
       console.log(fetchData);
       localStorage.setItem("userdata", JSON.stringify(fetchData?.data.user));
     } catch (error) {
@@ -44,18 +49,19 @@ const SettingsPage = () => {
       [name]: value,
     }));
   };
-  console.log();
 
   const attachFile = (e) => {
     if (e.target.files) {
       let imageFile = e.target.files[0];
+      setnewDetail({ image: imageFile });
+
       var reader = new FileReader();
       reader.readAsDataURL(imageFile);
       reader.onloadend = function (e) {
         var myImage = new Image();
         myImage.src = e.target.result;
         setFile(myImage.src);
-        setnewDetail({ image: myImage.src });
+        // setnewDetail({ image: myImage.src });
         return myImage;
       };
     }
@@ -92,6 +98,7 @@ const SettingsPage = () => {
                 <input
                   type="file"
                   className="d-none"
+                  name="image"
                   accept=".jpg, .jpeg, .png"
                   onChange={(e) => attachFile(e)}
                 />
