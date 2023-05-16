@@ -145,12 +145,22 @@ const LoginPage = () => {
                 Login
               </button>
             </div>
+
             <div className="d-flex justify-content-center align-itemms-center">
               <NavLink
                 to="/forgotpassword"
                 className="cr-p optional-btn text-dark letter-spacing"
               >
                 Forgot Password?
+              </NavLink>
+            </div>
+            <div className="d-flex justify-content-center align-itemms-center">
+              <NavLink
+                to="/register"
+                className="cr-p optional-btn text-dark letter-spacing"
+              >
+                Don't have an account?{" "}
+                <span className="text-blue font-weight-700">Register</span>
               </NavLink>
             </div>
           </form>
