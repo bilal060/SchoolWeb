@@ -176,7 +176,7 @@ const SignupPage = () => {
               </div>
               <div className="d-flex justify-content-center align-itemms-center">
                 <NavLink
-                  to="/register"
+                  to="/login"
                   className="cr-p optional-btn text-dark letter-spacing"
                 >
                   Already have an account?{" "}
