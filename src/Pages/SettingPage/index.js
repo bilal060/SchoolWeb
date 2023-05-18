@@ -17,44 +17,51 @@ const SettingsPage = () => {
     password: "",
     image: "",
   });
+
   const API_URI = `${process.env.REACT_APP_API_URI}//UpdateUserSetting/${userData?._id}`;
 
   const changeUserData = async () => {
     try {
       const data = new FormData();
       let allowEdit = false;
-      if(newDetail.name){
+      if (newDetail.name) {
         data.append("name", newDetail.name);
-        allowEdit= true
+        allowEdit = true;
       }
-      if(newDetail.password){
+      if (newDetail.password) {
         data.append("password", newDetail.password);
-        allowEdit= true
+        allowEdit = true;
       }
-      if(newDetail.image){
+      if (newDetail.image) {
         data.append("image", newDetail.image);
-        allowEdit= true
+        allowEdit = true;
       }
 
-      if(allowEdit) {
+      if (allowEdit) {
         const fetchData = await axios.patch(API_URI, data);
-        console.log(fetchData);
         localStorage.setItem("userdata", JSON.stringify(fetchData?.data.user));
+        alert("user Updated Successfuly");
+        setnewDetail({
+          name: "",
+          password: "",
+          image: "",
+        });
       }
-
-
     } catch (error) {
       console.log(error);
-      alert("Unable to Sign in. Please try after some time.");
+      alert("Unable to Update. Please try after some time.");
     }
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setpasswordCheck(true);
-    if (newDetail.password?.length < 16 && newDetail.password?.length >= 8) {
-      changeUserData();
-    } else return;
+    if (newDetail.password) {
+      setpasswordCheck(true);
+      if (newDetail.password?.length < 16 && newDetail.password?.length >= 8) {
+        changeUserData();
+      }
+    }
+    changeUserData();
   };
   const formHandler = (e) => {
     const { name, value } = e.target;
@@ -90,17 +97,25 @@ const SettingsPage = () => {
           }}
           className="w-75"
         >
-          <div className="d-flex justify-content-between align-items-center mb-5">
-            <div className="d-flex justify-content-between align-items-center h-100 gap-16px">
+          <div className="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-16px">
+            <div className="d-flex justify-content-between align-items-center h-100 gap-16px flex-wrap">
               <div className="setting-user-img">
                 <img
-                  src={file === null ? userData?.image : file}
+                  src={
+                    file === null
+                      ? `${
+                          userData?.image.includes("http")
+                            ? ""
+                            : `${process.env.REACT_APP_API_URI}/`
+                        }${userData?.image}`
+                      : file
+                  }
                   className="w-100 h-100"
                   alt="current user"
                 />
               </div>
 
-              <div className="d-flex flex-column justify-content-between gap-16px h-100">
+              <div className="d-flex flex-column justify-content-between gap-16px h-100 ">
                 <h2 className="text-capitalize font-24-100 font-weight-700">
                   {userData?.name}
                 </h2>
@@ -128,7 +143,6 @@ const SettingsPage = () => {
               value={newDetail.name}
               type="text"
               name="name"
-              required
               placeholder="Enter name"
               className="form-input"
               onChange={(e) => formHandler(e)}
@@ -140,7 +154,6 @@ const SettingsPage = () => {
               <input
                 value={newDetail.password}
                 name="password"
-                required
                 type={passwordShown ? "text" : "password"}
                 placeholder="Enter password"
                 className="form-input w-75 font-weight-800"

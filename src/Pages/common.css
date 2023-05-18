@@ -393,6 +393,8 @@ button:disabled {
 
 .user-icon-header {
   border-radius: 50%;
+  height: 50px !important;
+  width: 50px !important;
 }
 
 .sidebar-content {
@@ -705,7 +707,8 @@ button:disabled {
   height: 90px;
   width: 90px;
 }
-.setting-user-img img{
+
+.setting-user-img img {
   border-radius: 8px;
 }
 

@@ -54,17 +54,25 @@ const Header = (props) => {
           </p>
         </div>
         <img
-          src={userData?.image}
+          src={`${
+            userData?.image.includes("http")
+              ? ""
+              : `${process.env.REACT_APP_API_URI}/`
+          }${userData?.image}`}
           alt=""
-          className="w-100 h-100 user-icon-header"
+          className="user-icon-header"
         />
       </div>
       <Dropdown className="d-md-none d-block">
         <Dropdown.Toggle className="user-dropdown h-100" id="dropdown-basic">
           <img
-            src={userData?.image}
+            src={`${
+              userData?.image.includes("http")
+                ? ""
+                : `${process.env.REACT_APP_API_URI}/`
+            }${userData?.image}`}
             alt=""
-            className="w-100 h-100 user-icon-header"
+            className="user-icon-header"
           />
         </Dropdown.Toggle>
 

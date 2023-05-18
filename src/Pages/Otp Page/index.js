@@ -53,22 +53,21 @@ const OtpPage = () => {
     } catch (error) {
       console.log(error);
       setloading(true);
-      alert("Unable to login. Please try after some time.");
+      alert("Unable to send request. Please try after some time.");
     }
   };
 
-  //   const RESEND_OTP_API_URI = `${process.env.REACT_APP_API_URI}/resetPassWithOTP`;
-  //   const resendOtp = async () => {
-  //     try {
-  //       setloading(false);
-  //       const fetchData = await axios.post(RESEND_OTP_API_URI, resendOtpemail);
-  //       console.log(fetchData);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setloading(true);
-  //       alert("Unable to login. Please try after some time.");
-  //     }
-  //   };
+  const RESEND_OTP_API_URI = `${process.env.REACT_APP_API_URI}/resendOTP`;
+  const resendOtp = async () => {
+    try {
+      setotpTimer(60);
+      const fetchData = await axios.post(RESEND_OTP_API_URI, resendOtpemail);
+      console.log(fetchData);
+    } catch (error) {
+      console.log(error);
+      alert("Unable to send request. Please try after some time.");
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -133,8 +132,8 @@ const OtpPage = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
+                    resendOtp();
                   }}
-                  to="/forgotpassword"
                   className="cr-p optional-btn text-blue"
                 >
                   Resend Code

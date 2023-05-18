@@ -18,8 +18,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const API_URI = `${process.env.REACT_APP_API_URI}/login`;
 
-  console.log(process.env.REACT_APP_API_URI);
-
   const postLoginData = async () => {
     try {
       setloading(false);
@@ -50,7 +48,6 @@ const LoginPage = () => {
     e.preventDefault();
     postLoginData();
   };
-  console.log(login);
 
   const formHandler = (e) => {
     const { name, value } = e.target;

@@ -55,16 +55,7 @@ const AlertPage = () => {
     getAlerts();
   }, []);
 
-  // const setAlert = async (data) => {
-  //     try {
-  //         const fetchData = await axios.post(API_URI, data)
 
-  //         setalertsData(fetchData)
-  //     }
-  //     catch (error) {
-  //         console.log(error)
-  //     }
-  // }
   return (
     <>
       <div>

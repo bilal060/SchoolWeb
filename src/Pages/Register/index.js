@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../Assets/Images/logo";
 import ShowPassword from "../../Assets/Images/showPassword";
 import RegistrationLayout from "../../Components/Registration";
@@ -45,7 +45,6 @@ const SignupPage = () => {
       signinDetails.password?.length >= 8
     ) {
       postSigninData();
-      console.log("sds");
     } else console.log("sdaassas");
 
     return;
@@ -174,6 +173,15 @@ const SignupPage = () => {
                 >
                   Create Account
                 </button>
+              </div>
+              <div className="d-flex justify-content-center align-itemms-center">
+                <NavLink
+                  to="/register"
+                  className="cr-p optional-btn text-dark letter-spacing"
+                >
+                  Already have an account?{" "}
+                  <span className="text-blue font-weight-700">Login</span>
+                </NavLink>
               </div>
             </form>
           </div>
